@@ -3,17 +3,15 @@ package com.shirin.jpaspecdynamicsearchengine.book.application.search;
 import java.math.BigDecimal;
 import java.util.Set;
 
-//return a result DTO instead of returning entities
+// return a result DTO instead of returning entities
 
 public record BookSearchResult(
-        Long id,
-        String title,
-        String genre,
-        BigDecimal price,
-        Integer publishYear,
-        Boolean availability,
-        Long publisherId,
-        String publisherName,
-        Set<String> authors
-        ) {
-}
+    Long id,
+    String title,
+    String genre,
+    BigDecimal price,
+    Integer publishYear,
+    Boolean availability,
+    Long publisherId,
+    String publisherName,
+    Set<String> authors) {}
