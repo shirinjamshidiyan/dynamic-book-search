@@ -26,7 +26,7 @@ public class Book {
   private String title;
 
   @Column(name = "genre")
-  private String genre; // TODO1: change to a list of Enums
+  private String genre;
 
   @Column(nullable = false, precision = 12, scale = 2)
   private BigDecimal price;
