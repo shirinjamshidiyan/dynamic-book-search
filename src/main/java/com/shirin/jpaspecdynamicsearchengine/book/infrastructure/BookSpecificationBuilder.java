@@ -70,6 +70,9 @@ public class BookSpecificationBuilder {
   }
 
   public static Specification<Book> buildSpecification(BookSearchCriteria criteria) {
+    if (criteria == null) {
+      throw new IllegalArgumentException("criteria must not be null");
+    }
     List<Specification<Book>> specs = new ArrayList<>();
 
     if (criteria.title() != null && !criteria.title().isBlank()) {
