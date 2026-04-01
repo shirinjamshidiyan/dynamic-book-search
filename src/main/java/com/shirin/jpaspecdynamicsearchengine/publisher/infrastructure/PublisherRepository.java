@@ -1,4 +1,4 @@
-package com.shirin.jpaspecdynamicsearchengine.publisher.repository;
+package com.shirin.jpaspecdynamicsearchengine.publisher.infrastructure;
 
 import com.shirin.jpaspecdynamicsearchengine.publisher.domain.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;

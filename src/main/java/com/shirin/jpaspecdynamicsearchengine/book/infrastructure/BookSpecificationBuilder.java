@@ -19,12 +19,12 @@ public class BookSpecificationBuilder {
   // (partial, case-insensitive)
   private static Specification<Book> titleContains(String title) {
     return (root, query, cb) ->
-        cb.like(cb.lower(root.get("title")), "%" + title.toLowerCase() + "%");
+        cb.like(cb.lower(root.get("title")), "%" + title.trim().toLowerCase() + "%");
   }
 
   // (exact, case-insensitive)
   private static Specification<Book> genreEquals(String genre) {
-    return (root, query, cb) -> cb.equal(cb.lower(root.get("genre")), genre.toLowerCase());
+    return (root, query, cb) -> cb.equal(cb.lower(root.get("genre")), genre.trim().toLowerCase());
   }
 
   private static Specification<Book> availabilityEquals(Boolean available) {
@@ -55,17 +55,17 @@ public class BookSpecificationBuilder {
 
   private static Specification<Book> authorContains(String author) {
     return (root, query, cb) -> {
-      Join<Book, String> authorsJoin = root.joinSet("authors", JoinType.LEFT);
+      Join<Book, String> authorsJoin = root.joinSet("authors", JoinType.INNER);
       query.distinct(true);
-      return cb.like(cb.lower(authorsJoin), "%" + author.toLowerCase() + "%");
+      return cb.like(cb.lower(authorsJoin), "%" + author.trim().toLowerCase() + "%");
     };
   }
 
   private static Specification<Book> publisherNameContains(String publisherName) {
     return (root, query, cb) -> {
-      Join<Book, Publisher> publisherJoin = root.join("publisher", JoinType.LEFT);
+      Join<Book, Publisher> publisherJoin = root.join("publisher", JoinType.INNER);
       query.distinct(true);
-      return cb.like(cb.lower(publisherJoin.get("name")), "%" + publisherName.toLowerCase() + "%");
+      return cb.like(cb.lower(publisherJoin.get("name")), "%" + publisherName.trim().toLowerCase() + "%");
     };
   }
 

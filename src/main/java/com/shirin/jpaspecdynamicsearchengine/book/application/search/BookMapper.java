@@ -4,6 +4,7 @@ import com.shirin.jpaspecdynamicsearchengine.book.domain.Book;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -11,9 +12,7 @@ public final class BookMapper {
 
     public static BookSearchResult toResultDTO(Book book) {
 
-        if(book==null) {
-            return null;
-        }
+        Objects.requireNonNull(book, "book must not be null");
         return new BookSearchResult(
                 book.getId(),
                 book.getTitle(),

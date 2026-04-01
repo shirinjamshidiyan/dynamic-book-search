@@ -1,9 +1,10 @@
 package com.shirin.jpaspecdynamicsearchengine.book.web.view;
 
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchCriteria;
+import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchCriteriaValidator;
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchResult;
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchUseCase;
-import com.shirin.jpaspecdynamicsearchengine.publisher.repository.PublisherRepository;
+import com.shirin.jpaspecdynamicsearchengine.publisher.infrastructure.PublisherRepository;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,47 +26,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookSearchViewController {
 
   private final BookSearchUseCase bookSearchUseCase;
-  private final PublisherRepository publisherRepository;
-
   @GetMapping
   public String search(
       @Valid @ModelAttribute(name = "search") BookSearchCriteria search,
       BindingResult bindingResult,
       @PageableDefault(size = 10, sort = "title") Pageable pageable,
       Model model) {
-    model.addAttribute("publishers", publisherRepository.findAllNames());
+
+    model.addAttribute("publishers", bookSearchUseCase.getAllPublisherNames());
     model.addAttribute("genres", bookSearchUseCase.getAllGenres());
 
+    //Business validation
+    BookSearchCriteriaValidator.validate(search, bindingResult);
     if (bindingResult.hasErrors()) {
-      model.addAttribute("page", Page.empty());
+      model.addAttribute("page", Page.empty(pageable));
+      model.addAttribute("pageRange", List.of());
       return "books";
     }
 
-    Page<BookSearchResult> searchResults = bookSearchUseCase.search(search, pageable);
+    Page<BookSearchResult> searchResults = bookSearchUseCase.searchPage(search, pageable);
     model.addAttribute("page", searchResults);
 
-    String sortProperty =
-        pageable.getSort().stream().findFirst().map(Sort.Order::getProperty).orElse("title");
-    String sortDir =
-        pageable.getSort().stream()
-            .findFirst()
-            .map(order -> order.getDirection().name().toLowerCase())
-            .orElse("asc");
-    model.addAttribute("sortBy", sortProperty);
-    model.addAttribute("sortDir", sortDir);
+    Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("title"));
+    model.addAttribute("sortBy", order.getProperty());
+    model.addAttribute("sortDir", order.getDirection().name().toLowerCase());
+    model.addAttribute("pageRange", buildPageRange(searchResults));
 
-    int totalPages = searchResults.getTotalPages();
-    if (totalPages > 0) {
-      int currentPage = searchResults.getNumber() + 1;
-      int startPage = Math.max(1, currentPage - 2);
-      int endPage = Math.min(totalPages, currentPage + 2);
-
-      List<Integer> pageRange = new ArrayList<>();
-      for (int i = startPage; i <= endPage; i++) {
-        pageRange.add(i);
-      }
-      model.addAttribute("pageRange", pageRange);
-    }
     return "books";
+  }
+
+  private List<Integer> buildPageRange(Page<BookSearchResult> page) {
+    int totalPages = page.getTotalPages();
+    if (totalPages == 0) {
+      return List.of();
+    }
+
+    int currentPage = page.getNumber() + 1;
+    int startPage = Math.max(1, currentPage - 2);
+    int endPage = Math.min(totalPages, currentPage + 2);
+
+    List<Integer> pageRange = new ArrayList<>();
+    for (int i = startPage; i <= endPage; i++) {
+      pageRange.add(i);
+    }
+    return pageRange;
   }
 }
