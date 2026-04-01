@@ -4,22 +4,16 @@ import com.shirin.jpaspecdynamicsearchengine.book.application.search.*;
 import com.shirin.jpaspecdynamicsearchengine.book.web.api.error.ValidationErrorMapper;
 import com.shirin.jpaspecdynamicsearchengine.book.web.api.error.ValidationException;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Valid;
 import jakarta.validation.Validator;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor

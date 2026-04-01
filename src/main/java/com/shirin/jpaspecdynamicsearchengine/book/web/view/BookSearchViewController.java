@@ -4,7 +4,6 @@ import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchC
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchCriteriaValidator;
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchResult;
 import com.shirin.jpaspecdynamicsearchengine.book.application.search.BookSearchUseCase;
-import com.shirin.jpaspecdynamicsearchengine.publisher.infrastructure.PublisherRepository;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookSearchViewController {
 
   private final BookSearchUseCase bookSearchUseCase;
+
   @GetMapping
   public String search(
       @Valid @ModelAttribute(name = "search") BookSearchCriteria search,
@@ -36,7 +36,7 @@ public class BookSearchViewController {
     model.addAttribute("publishers", bookSearchUseCase.getAllPublisherNames());
     model.addAttribute("genres", bookSearchUseCase.getAllGenres());
 
-    //Business validation
+    // Business validation
     BookSearchCriteriaValidator.validate(search, bindingResult);
     if (bindingResult.hasErrors()) {
       model.addAttribute("page", Page.empty(pageable));
