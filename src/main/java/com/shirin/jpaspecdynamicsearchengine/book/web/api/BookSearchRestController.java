@@ -30,6 +30,7 @@ public class BookSearchRestController {
     BeanPropertyBindingResult errors = new BeanPropertyBindingResult(criteria, "criteria");
 
     applyBeanValidation(criteria, errors);
+
     BookSearchCriteriaValidator.validate(criteria, errors);
 
     if (errors.hasErrors()) {

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
-@Order(1)
+@Order(2)
 @RequiredArgsConstructor
 public class ViewExceptionHandler {
 
