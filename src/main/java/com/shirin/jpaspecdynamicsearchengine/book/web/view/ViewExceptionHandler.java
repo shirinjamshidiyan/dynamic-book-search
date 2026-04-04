@@ -12,27 +12,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-@ControllerAdvice
-@Order(2)
+@ControllerAdvice(basePackageClasses = BookSearchViewController.class)
 @RequiredArgsConstructor
 public class ViewExceptionHandler {
 
   private final MessageSource messageSource;
-  @ExceptionHandler(NoHandlerFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ModelAndView handleNoHandlerFoundException(
-      NoHandlerFoundException ex, HttpServletRequest request) {
-    ModelAndView mav = new ModelAndView("error");
-    mav.addObject("error", "Not Found");
-    mav.addObject("status", 404);
-    mav.addObject("message",
-            messageSource.getMessage(
-                    "error.notFound",
-                    null,
-                    LocaleContextHolder.getLocale()));
-    mav.addObject("path", request.getRequestURI());
-    return mav;
-  }
 
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

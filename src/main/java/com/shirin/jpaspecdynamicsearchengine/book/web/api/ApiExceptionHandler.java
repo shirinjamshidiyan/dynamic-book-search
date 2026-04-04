@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-@RestControllerAdvice
-@Order(1)
+@RestControllerAdvice(basePackageClasses = BookSearchRestController.class)
 @RequiredArgsConstructor
 public class ApiExceptionHandler {
   private final MessageSource messageSource;
@@ -72,21 +71,6 @@ public class ApiExceptionHandler {
                     LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         null);
-  }
-
-  @ExceptionHandler(NoHandlerFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ApiError handleNoHandlerFoundException(
-      NoHandlerFoundException ex, HttpServletRequest request) {
-
-    return new ApiError(
-        LocalDateTime.now(),
-            404,
-            "Not Found",
-            messageSource.getMessage("error.notFound", null, "Resource Not Found",
-                    LocaleContextHolder.getLocale()),
-            request.getRequestURI(),
-            null);
   }
 
   @ExceptionHandler(Exception.class)
