@@ -22,7 +22,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice
-@Order(2)
+@Order(1)
 @RequiredArgsConstructor
 public class ApiExceptionHandler {
   private final MessageSource messageSource;
@@ -35,7 +35,7 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.validation", null, "Validation failed",
+            messageSource.getMessage("error.validation", null, "Validation Failed",
                     LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         ex.getFieldErrors());
@@ -53,7 +53,7 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.validation", null, "Validation failed",
+            messageSource.getMessage("error.validation", null, "Validation Failed",
                     LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         fieldErrors);
@@ -68,7 +68,7 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.malformedJson", null, "Malformed JSON request",
+            messageSource.getMessage("error.malformedJson", null, "Malformed JSON Request",
                     LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         null);
@@ -83,7 +83,7 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
             404,
             "Not Found",
-            messageSource.getMessage("error.notFound", null, "Resource not found",
+            messageSource.getMessage("error.notFound", null, "Resource Not Found",
                     LocaleContextHolder.getLocale()),
             request.getRequestURI(),
             null);
@@ -97,7 +97,7 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         500,
         "Internal Server Error",
-            messageSource.getMessage("error.internal", null, "Unexpected error occurred",
+            messageSource.getMessage("error.internal", null, "Unexpected Error Occurred",
                     LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         null);
