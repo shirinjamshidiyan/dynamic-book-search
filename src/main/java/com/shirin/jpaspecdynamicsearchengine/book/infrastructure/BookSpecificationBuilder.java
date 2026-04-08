@@ -65,7 +65,8 @@ public class BookSpecificationBuilder {
     return (root, query, cb) -> {
       Join<Book, Publisher> publisherJoin = root.join("publisher", JoinType.INNER);
       query.distinct(true);
-      return cb.like(cb.lower(publisherJoin.get("name")), "%" + publisherName.trim().toLowerCase() + "%");
+      return cb.like(
+          cb.lower(publisherJoin.get("name")), "%" + publisherName.trim().toLowerCase() + "%");
     };
   }
 

@@ -6,11 +6,9 @@ import com.shirin.jpaspecdynamicsearchengine.book.web.api.error.ValidationExcept
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice(basePackageClasses = BookSearchRestController.class)
 @RequiredArgsConstructor
@@ -34,8 +30,8 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.validation", null, "Validation Failed",
-                    LocaleContextHolder.getLocale()),
+        messageSource.getMessage(
+            "error.validation", null, "Validation Failed", LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         ex.getFieldErrors());
   }
@@ -52,8 +48,8 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.validation", null, "Validation Failed",
-                    LocaleContextHolder.getLocale()),
+        messageSource.getMessage(
+            "error.validation", null, "Validation Failed", LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         fieldErrors);
   }
@@ -67,8 +63,8 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         400,
         "Bad Request",
-            messageSource.getMessage("error.malformedJson", null, "Malformed JSON Request",
-                    LocaleContextHolder.getLocale()),
+        messageSource.getMessage(
+            "error.malformedJson", null, "Malformed JSON Request", LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         null);
   }
@@ -81,8 +77,8 @@ public class ApiExceptionHandler {
         LocalDateTime.now(),
         500,
         "Internal Server Error",
-            messageSource.getMessage("error.internal", null, "Unexpected Error Occurred",
-                    LocaleContextHolder.getLocale()),
+        messageSource.getMessage(
+            "error.internal", null, "Unexpected Error Occurred", LocaleContextHolder.getLocale()),
         request.getRequestURI(),
         null);
   }
