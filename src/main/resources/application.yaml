@@ -1,27 +1,17 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:bookdb
-    username: sa
-    password:
-
+  application:
+    name: jpa-spec-dynamic-search-engine
   jpa:
+    open-in-view: false
     hibernate:
-      ddl-auto: update
-    defer-datasource-initialization: true
-    show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-
-  sql:
-    init:
-      mode: always
-
+      ddl-auto: validate
   web:
     resources:
       add-mappings: false
-
+  flyway:
+    locations: classpath:db/migration
+  sql:
+    init:
+      mode: never
+server:
+  port: 8080

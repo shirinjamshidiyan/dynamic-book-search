@@ -14,16 +14,12 @@ public final class BookSearchCriteriaValidator {
     if (criteria.minPrice() != null
         && criteria.maxPrice() != null
         && criteria.minPrice().compareTo(criteria.maxPrice()) > 0) {
-      errors.rejectValue(
-          "minPrice",
-          "bookSearch.minPrice.greaterThanMaxPrice");
+      errors.rejectValue("minPrice", "bookSearch.minPrice.greaterThanMaxPrice");
     }
     if (criteria.publishYearFrom() != null
         && criteria.publishYearTo() != null
         && criteria.publishYearFrom() > criteria.publishYearTo()) {
-      errors.rejectValue(
-          "publishYearFrom",
-          "bookSearch.publishYearFrom.greaterThanPublishYearTo");
+      errors.rejectValue("publishYearFrom", "bookSearch.publishYearFrom.greaterThanPublishYearTo");
     }
   }
 }

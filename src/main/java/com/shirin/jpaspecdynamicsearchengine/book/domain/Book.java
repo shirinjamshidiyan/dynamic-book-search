@@ -40,6 +40,7 @@ public class Book {
   @ElementCollection
   @CollectionTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"))
   @Column(name = "author", nullable = false)
+  @org.hibernate.annotations.BatchSize(size = 50) // to avoid N+1 queries problem
   private Set<String> authors = new HashSet<>();
 
   // Read-only association for query convenience. publisherId remains the source of truth.
