@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookSearchRestController {
   private final BookSearchUseCase bookSearchUseCase;
   private final Validator validator;
+  private final ValidationErrorMapper validationErrorMapper;
 
   @PostMapping("/search")
   public PageResponse<BookSearchResult> search(
@@ -34,7 +35,7 @@ public class BookSearchRestController {
     BookSearchCriteriaValidator.validate(criteria, errors);
 
     if (errors.hasErrors()) {
-      throw new ValidationException(ValidationErrorMapper.toFieldErrors(errors));
+      throw new ValidationException(validationErrorMapper.toFieldErrors(errors));
     }
 
     return bookSearchUseCase.searchForApi(criteria, pageable);
