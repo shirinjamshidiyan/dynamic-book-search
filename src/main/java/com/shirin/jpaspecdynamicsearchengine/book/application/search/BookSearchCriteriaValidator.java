@@ -19,7 +19,8 @@ public final class BookSearchCriteriaValidator {
     if (criteria.publishYearFrom() != null
         && criteria.publishYearTo() != null
         && criteria.publishYearFrom() > criteria.publishYearTo()) {
-      errors.rejectValue("publishYearFrom", "bookSearch.publishYearFrom.greaterThanPublishYearTo");
+      errors.rejectValue("publishYearFrom",
+              "bookSearch.publishYearFrom.greaterThanPublishYearTo");
     }
   }
 }
