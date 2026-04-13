@@ -1,6 +1,6 @@
 spring:
   application:
-    name: jpa-spec-dynamic-search-engine
+    name: jpa-spec-dynamic-search-app
   jpa:
     open-in-view: false
     hibernate:

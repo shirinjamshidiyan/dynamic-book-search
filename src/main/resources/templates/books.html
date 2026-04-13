@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:margin="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Shirin BookStore</title>
+    <title>Dynamic Book Search</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-light">
 
 <div class="container mt-4">
 
-    <h2 class="mb-3 text-center">📚 Advanced Book Search</h2>
-
+    <div class="text-center mb-4">
+        <h2 class="mb-1">📚 Dynamic Book Search (Specification-Based)</h2>
+        <p class="text-muted mb-0">Dynamic filtering with AND/OR logic, pagination, and sorting</p>
+    </div>
     <!-- Search Form Part -->
     <div class="card p-4 mb-5 shadow-sm border-primary">
-<!--        <h5 class="mb-3 text-center fw-bold text-primary">🔍 Advanced Search options:</h5>-->
+
         <form th:action="@{/view/books}" th:object="${search}" method="get">
 <!--            Error message display-->
             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
@@ -21,7 +23,7 @@
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
                 </ul>
             </div>
-
+            <h5 class="mb-3 fw-bold text-primary">Advanced Search Options</h5>
 <!--            Search form part-->
             <div class="row g-2 mb-2">
                 <div class="col-md-4">
@@ -94,12 +96,22 @@
 
             <div class="text-center mt-3">
                 <button type="submit" class="btn btn-primary btn-sm px-4">Search</button>
-                <a th:href="@{/view/books}" class="btn btn-secondary btn-sm ms-2">Reset</a>
+                <a th:href="@{/view/books}" class="btn btn-outline-secondary btn-sm px-3 ms-2">Reset</a>
             </div>
         </form>
     </div>
 
-
+    <!-- Showing the number of results-->
+    <div class="mt-2 mb-3 text-center text-secondary fw-medium"
+         th:if="${page.totalElements > 0}" style="font-size: 0.95rem;">
+        Showing
+        <span th:text="${page.number * page.size + 1}"></span>
+        -
+        <span th:text="${page.number * page.size + page.content.size()}"></span>
+        of
+        <span th:text="${page.totalElements}"></span>
+        results
+    </div>
 
     <!-- Search Results-->
     <table class="table table-striped table-bordered mt-4">
@@ -200,7 +212,7 @@
                 </a>
             </th>
 <!--            Availability header-->
-            <th>Available</th>
+            <th>In Stock</th>
 <!--            PublishYear header-->
             <th>Year</th>
         </tr>
@@ -224,8 +236,11 @@
     </table>
 
     <!-- Pagination Part-->
-    <div class="pagination" th:if="${page.totalElements > 0}">
-        <ul style="list-style:none; display:flex; gap:6px;">
+<!--    <div class="pagination" th:if="${page.totalElements > 0}">-->
+<!--        <ul style="list-style:none; display:flex; gap:6px; justify-content:center;" >-->
+    <div class="pagination d-flex justify-content-center mt-3" th:if="${page.totalElements > 0}">
+        <ul class="mb-0 ps-0 d-flex gap-2" style="list-style:none;">
+
 
             <!--Prev link-->
             <li th:if="${page.hasPrevious()}">

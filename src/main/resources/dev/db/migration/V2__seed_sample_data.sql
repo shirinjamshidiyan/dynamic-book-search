@@ -19,7 +19,6 @@ INSERT INTO publishers (id, name, founded_year) VALUES
 -- ==============================
 -- BOOKS
 -- ==============================
--- Each row: id, title, genre, price, publish_year, available, publisher_id
 INSERT INTO books (id, title, genre, price, publish_year, availability, publisher_id) VALUES
                                                                                           (1, 'Effective Java', 'Programming', 45.50, 2018, TRUE, 6),
                                                                                           (2, 'Clean Code', 'Programming', 42.00, 2017, FALSE, 6),
