@@ -7,7 +7,7 @@ public class ValidationException extends RuntimeException {
 
   public ValidationException(List<FieldErrorDTO> fieldErrors) {
     super("Validation failed");
-    this.fieldErrors = fieldErrors;
+    this.fieldErrors = fieldErrors == null ? List.of() : List.copyOf(fieldErrors);
   }
 
   public List<FieldErrorDTO> getFieldErrors() {

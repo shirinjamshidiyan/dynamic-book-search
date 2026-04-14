@@ -27,17 +27,18 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 /*
- Repository integration test for Book search specifications using Spring Data JPA,
- Flyway-managed schema, and a temporary PostgreSQL container.
- */
+Repository integration test for Book search specifications using Spring Data JPA,
+Flyway-managed schema, and a temporary PostgreSQL container.
+*/
 @DataJpaTest
 @Testcontainers
 @ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //execute on the real postqres table
+@AutoConfigureTestDatabase(
+    replace = AutoConfigureTestDatabase.Replace.NONE) // execute on the real postqres table
 class BookSpecificationRepositoryIT {
 
-  @Container
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16");
+  @Container static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16");
+
   @DynamicPropertySource
   static void configureProperties(DynamicPropertyRegistry registry) {
     registry.add("spring.datasource.url", postgres::getJdbcUrl);
@@ -50,7 +51,6 @@ class BookSpecificationRepositoryIT {
     registry.add("spring.jpa.hibernate.ddl-auto", () -> "validate");
     registry.add("spring.sql.init.mode", () -> "never");
   }
-
 
   @Autowired private BookRepository bookRepository;
   @Autowired private EntityManager entityManager;

@@ -119,10 +119,10 @@ class BookSearchRestControllerTest {
 
     when(validator.validate(any(BookSearchCriteria.class))).thenReturn(violations);
     when(validationErrorMapper.toFieldErrors(any()))
-            .thenReturn(
-                    List.of(
-                            new FieldErrorDTO("title", "Title must be at most 100 characters"),
-                            new FieldErrorDTO("minPrice", "Minimum price must be zero or positive")));
+        .thenReturn(
+            List.of(
+                new FieldErrorDTO("title", "Title must be at most 100 characters"),
+                new FieldErrorDTO("minPrice", "Minimum price must be zero or positive")));
     mockMvc
         .perform(post("/api/books/search").contentType(MediaType.APPLICATION_JSON).content("{}"))
         .andExpect(status().isBadRequest())
@@ -144,10 +144,12 @@ class BookSearchRestControllerTest {
 
     when(validator.validate(any(BookSearchCriteria.class))).thenReturn(Set.of());
     when(validationErrorMapper.toFieldErrors(any()))
-            .thenReturn(
-                    List.of(
-                            new FieldErrorDTO("minPrice", "Minimum price cannot be greater than maximum price"),
-                            new FieldErrorDTO("publishYearFrom", "Publish year from cannot be greater than publish year to")));
+        .thenReturn(
+            List.of(
+                new FieldErrorDTO("minPrice", "Minimum price cannot be greater than maximum price"),
+                new FieldErrorDTO(
+                    "publishYearFrom",
+                    "Publish year from cannot be greater than publish year to")));
 
     // invalid request payload
     SearchRequest request =

@@ -9,4 +9,8 @@ public record ApiError(
     String error,
     String message,
     String path,
-    List<FieldErrorDTO> fieldErrors) {}
+    List<FieldErrorDTO> fieldErrors) {
+  public ApiError {
+    fieldErrors = fieldErrors == null ? List.of() : List.copyOf(fieldErrors);
+  }
+}

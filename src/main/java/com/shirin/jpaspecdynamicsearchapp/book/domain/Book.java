@@ -3,6 +3,7 @@ package com.shirin.jpaspecdynamicsearchapp.book.domain;
 import com.shirin.jpaspecdynamicsearchapp.publisher.domain.Publisher;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.AccessLevel;
@@ -47,4 +48,8 @@ public class Book {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "publisher_id", insertable = false, updatable = false)
   private Publisher publisher;
+
+  public Set<String> getAuthors() {
+    return Collections.unmodifiableSet(authors);
+  }
 }

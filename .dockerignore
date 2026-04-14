@@ -2,4 +2,4 @@ target
 .idea
 .git
 .gitignore
-README.md
+../../notification-service/ReadMe.md

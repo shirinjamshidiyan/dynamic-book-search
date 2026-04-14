@@ -194,9 +194,6 @@
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>4.8.6.2</version>
-<!--                <configuration>-->
-<!--                    <excludeFilterFile>config/spotbugs/exclude.xml</excludeFilterFile>-->
-<!--                </configuration>-->
                 <executions>
                     <execution>
                         <phase>verify</phase>

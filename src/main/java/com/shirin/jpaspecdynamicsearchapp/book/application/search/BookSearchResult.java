@@ -14,4 +14,8 @@ public record BookSearchResult(
     Boolean availability,
     Long publisherId,
     String publisherName,
-    Set<String> authors) {}
+    Set<String> authors) {
+  public BookSearchResult {
+    authors = authors == null ? Set.of() : Set.copyOf(authors);
+  }
+}

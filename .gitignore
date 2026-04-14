@@ -1,4 +1,4 @@
-ReadMe.md
+../../notification-service/ReadMe.md
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
