@@ -11,6 +11,6 @@ public record ApiError(
     String path,
     List<FieldErrorDTO> fieldErrors) {
   public ApiError {
-    fieldErrors = fieldErrors == null ? List.of() : List.copyOf(fieldErrors);
+    fieldErrors = fieldErrors == null ? List.of() : List.copyOf(fieldErrors); // related to SpotBugs
   }
 }

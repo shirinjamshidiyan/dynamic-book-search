@@ -24,7 +24,6 @@
                 </ul>
             </div>
             <h5 class="mb-3 fw-bold text-primary">Advanced Search Options</h5>
-<!--            Search form part-->
             <div class="row g-2 mb-2">
                 <div class="col-md-4">
                     <label class="form-label fw-semibold small">Title</label>
@@ -117,7 +116,7 @@
     <table class="table table-striped table-bordered mt-4">
         <thead class="table-light">
         <tr>
-<!--            Title heaader-->
+<!--            Title header-->
             <th>
                 <a th:href="@{/view/books(
                 page=0,
@@ -235,10 +234,7 @@
         </tbody>
     </table>
 
-    <!-- Pagination Part-->
-<!--    <div class="pagination" th:if="${page.totalElements > 0}">-->
-<!--        <ul style="list-style:none; display:flex; gap:6px; justify-content:center;" >-->
-    <div class="pagination d-flex justify-content-center mt-3" th:if="${page.totalElements > 0}">
+    <div class="pagination d-flex justify-content-center mt-3 mb-5" th:if="${page.totalElements > 0}">
         <ul class="mb-0 ps-0 d-flex gap-2" style="list-style:none;">
 
 
@@ -345,7 +341,6 @@
 
         </ul>
     </div>
-<!--    <&#45;&#45;  sort=${param.sort},  &#45;&#45; >sort=${sortBy + ',' + sortDir} &ndash;&gt;-->
 
 </div>
 

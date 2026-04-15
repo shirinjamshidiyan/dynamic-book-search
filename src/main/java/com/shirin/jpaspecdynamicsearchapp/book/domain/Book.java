@@ -49,6 +49,7 @@ public class Book {
   @JoinColumn(name = "publisher_id", insertable = false, updatable = false)
   private Publisher publisher;
 
+  // related to SpotBugs
   public Set<String> getAuthors() {
     return Collections.unmodifiableSet(authors);
   }
