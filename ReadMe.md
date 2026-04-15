@@ -21,7 +21,7 @@ Prerequisites:
 Run the application:
 
 ```bash
-git https://github.com/shirinjamshidiyan/dynamic-book-search
+git clone https://github.com/shirinjamshidiyan/dynamic-book-search
 cd dynamic-book-search
 cp .env.example .env
 docker compose up
@@ -169,7 +169,7 @@ Copy the example environment file first:
 cp .env.example .env
 ```
 
-Then update the values in `.env` before starting the application.
+Then update the values in `.env` before starting the application (Optional).
 
 ### Demo flow
 
